@@ -17,4 +17,4 @@ class Car {
   }
 }
 
-export { Car };
+export {Car as Carro}
