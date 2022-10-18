@@ -1,0 +1,8 @@
+{
+  "name": "primeiro-projeto",
+  "version": "1.0.0",
+  "description": "primeiro projeto curso js avancado",
+  "author": "bruna franchi",
+  "license": "MIT",
+  "type": "module"
+}
