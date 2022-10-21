@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tudo sobre promises</title>
+</head>
+<body>
+  <script>
+
+    function resolvida(){
+      return Promise.resolve(30)
+    }
+
+    //depois do resolvida realizada, é passado o THEN
+    // no THEN se passa uma função a qual você quer que seja realizada depois da resolvida()
+    resolvida().then(function(data){
+      console.log('promise resolvida', data)
+    })
+
+    function rejeitada(){
+      return Promise.reject()
+    }
+
+    rejeitada().catch(function(){
+      console.log("REJEITADA")
+    })
+
+    function promiseTrabalhada(){
+      return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve("Olá")
+          },1000)
+      })
+    }
+
+    promiseTrabalhada().then((message) => {
+      console.log(message)
+    })
+
+    //https://viacep.com.br/ws/13214200/json
+
+    window
+    .fetch('https://viacep.com.br/ws/13214200/json')
+    .then((data) => {
+      console.log(data.json()
+      .then((endereco) => {
+        console.log(endereco)
+      }))
+    })
+
+  
+
+  </script>
+  
+</body>
+</html>

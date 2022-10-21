@@ -19,19 +19,42 @@ let pedido3 = {
 //setTimeOut inicia outra linha de processamento e continua a processar
 const cozinha = (pedido, callback) =>
   setTimeout(() => {
-    console.log(pedido['nome'] + 'pronto')
-    callback(pedido['nome'])
+    console.log(pedido['nome'] + ' pronto')
+    //quando chamava o garçom como callback a tarefa se tornava o pedido['nome']
+    callback(pedido['nome'] + ' para cliente')
   }, pedido['tempo'])
 //calback da cozinha é o garçom
-const garcom = tarefa => console.log('Levando ' + tarefa)
+const garcom = (tarefa, callback) => {
+  console.log('Levando ' + tarefa)
+  callback()
+}
 
+const fazerPedido1 = () => {
+  garcom('pedido 1 para cozinha', () => {
+    cozinha(pedido1, retornoPedido1())
+  })
+}
+
+const retornoPedido1 = retorno1 =>
+  garcom('pedido 2 para cozinha', fazerPedido2())
+
+const fazerPedido2 = () => cozinha(pedido2, retornarPedido2())
+
+const retornarPedido2 = retorno2 =>
+  garcom('pedido 3 para cozinha', fazerPedido3())
+
+const fazerPedido3 = () => cozinha(pedido3, retornarPedido3())
+
+const retornarPedido3 = retorno3 => garcom(retorno3, encerrarPedidos())
+
+const encerrarPedidos = () => {
+  console.log('Encerrando pedidos')
+  console.log('Entregando conta')
+}
+//callback hell
 const janta = () => {
   console.log('iniciando pedidos')
-  cozinha(pedido1, garcom)
-  cozinha(pedido2, garcom)
-  cozinha(pedido3, garcom)
-  console.log('encerrando pedidos')
-  console.log('pedir conta') //teria que colocar essa função no callback para ser executada em sequencia
+  fazerPedido1()
 }
 
 janta()
